@@ -1,6 +1,17 @@
-# kickstart.nvim
+# TODO
 
-https://github.com/kdheepak/kickstart.nvim/assets/1813121/f3ff9a2b-c31f-44df-a4fa-8a0d7b17cf7b
+* Customize window splitting (\<C-W\> is not the most comfortable keybind)
+* Try to figure out the lcd logic that's left unfinished now
+* Add shortcut to make Oil open up in root of the CWD, make it \<leader\>o, change the default shortcut (open in current file's directory) to be \<leader\>O instead
+  * Explore the idea of making the CWD root command open a floating Oil window with a smaller form factor, for quicker navigation
+* Add keybind in Oil to open selected folder in a new tab and set it as that tab's CWD (with lcd probs)
+* Figure out whether it's possible to change the file name colors depending on their git status
+* Add shortcut to quicksave with \<C-W\> (will need to remove the current keymaps on there that do something with workspaces and are useless for me)
+* Move out the neovide config into an optional separate config file, and create an example config file, while ignoring the actual file
+* Figure out how to make eslint_d work properly (probably need the eslint.nvim plugin, integrated Mason one doesn't work properly)
+* (Low priority) Figure out whether it's possible to set the tab names to be the CWD name, optionally it'd be that when tab is not focused and switches to active file name when focused
+
+# kickstart.nvim
 
 ### Introduction
 
@@ -176,18 +187,4 @@ Each PR, especially those which increase the line count, should have a descripti
   * Discussions on this topic can be found here:
     * [Restructure the configuration](https://github.com/nvim-lua/kickstart.nvim/issues/218)
     * [Reorganize init.lua into a multi-file setup](https://github.com/nvim-lua/kickstart.nvim/pull/473)
-
-### Windows Installation
-
-Installation may require installing build tools, and updating the run command for `telescope-fzf-native`
-
-See `telescope-fzf-native` documentation for [more details](https://github.com/nvim-telescope/telescope-fzf-native.nvim#installation)
-
-This requires:
-
-- Install CMake, and the Microsoft C++ Build Tools on Windows
-
-```lua
-{'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-```
 
