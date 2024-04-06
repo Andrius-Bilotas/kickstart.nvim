@@ -74,19 +74,16 @@ vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 ---------------------------------------
 -- Tabs
 ---------------------------------------
-local function test(opts)
+local function change_tab_cwd()
   local git_root = find_git_root()
-  local parsed = load("return " .. opts.args)
   vim.cmd.tc(git_root)
-  return {}
 end
 
-vim.api.nvim_create_user_command('FuckinWorkGoddamnIt', test, {})
+vim.api.nvim_create_user_command('ChangeTabCwd', change_tab_cwd, {})
 vim.keymap.set('n', '<leader>tb', require('telescope.builtin').buffers, { desc = 'Show Buffers from all Tabs' })
 vim.keymap.set('n', '<leader>tn', '<CMD>tabe<CR>', {desc = 'Create New Tab'})
 vim.keymap.set('n', '<leader>tc', '<CMD>tabc<CR>', {desc = 'Close Current Tab'})
--- vim.keymap.set('n', '<leader>ts', '<CMD>tcd ' .. find_git_root() .. '<CR>', {desc = 'Set directory to current working directory for active tab'})
--- vim.keymap.set('n', '<CMD>FuckinWorkGoddamnIt<CR>', {desc = 'Set directory to current working directory for active tab'})
+vim.keymap.set('n', '<leader>ts', '<CMD>ChangeTabCwd<CR>', {desc = 'Set directory to current working directory for active tab'})
 vim.keymap.set('n', '<M-h>', '<CMD>tabn -<CR>', {desc = 'Go to previous tab'})
 vim.keymap.set('n', '<M-l>', '<CMD>tabn +<CR>', {desc = 'Go to next tab'})
 
@@ -99,9 +96,37 @@ vim.keymap.set('n', '<M-l>', '<CMD>tabn +<CR>', {desc = 'Go to next tab'})
 ---------------------------------------
 -- Oil
 ---------------------------------------
-vim.keymap.set('n', '<leader>o', '<CMD>Oil<CR>', {desc = "Open [O]il"})
+local function open_oil_in_cwd()
+  require('oil').open(find_git_root())
+end
+
+local function open_file_in_new_tab()
+  local file_name = require('oil').get_cursor_entry().name
+  local dir = require('oil').get_current_dir()
+  local full_path = dir .. file_name
+  vim.cmd('tabnew ' .. full_path)
+  change_tab_cwd()
+end
+
+vim.api.nvim_create_user_command('OpenAndChangeCwd', open_file_in_new_tab, {})
+vim.api.nvim_create_user_command('OpenOilInCwd', open_oil_in_cwd, {})
+vim.keymap.set('n', '<leader>O', '<CMD>Oil<CR>', {desc = "Open [O]il in current file directory"})
+vim.keymap.set('n', '<leader>o', '<CMD>OpenOilInCwd<CR>', {desc = "Open [O]il in current working directory"})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = 'oil',
+  callback = function (params)
+    vim.keymap.set('n', '<C-t>', '<CMD>OpenAndChangeCwd<CR>', { buffer = params.buf, remap = true, nowait = true})
+  end
+})
 
 ---------------------------------------
 -- Monorepo
 ---------------------------------------
 -- vim.keymap.set('n', '<leader>ml', '<CMD>Telescope monorepo<CR>', { desc = "Open Repo List" })
+
+---------------------------------------
+-- Other
+---------------------------------------
+
+vim.keymap.set('n', '<leader>w', '<CMD>w<CR>', {desc = "Save changes"})

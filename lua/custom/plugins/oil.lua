@@ -9,7 +9,7 @@ return {
 				["<CR>"] = "actions.select",
 				["<C-s>"] = "actions.select_vsplit",
 				["<C-\\>"] = "actions.select_split",
-				["<C-t>"] = "actions.select_tab",
+				-- ["<C-t>"] = "actions.select_tab",
 				["<C-p>"] = "actions.preview",
 				["<C-c>"] = "actions.close",
 				["<C-r>"] = "actions.refresh",
@@ -30,7 +30,10 @@ return {
 			skip_confirm_for_simple_edits = true,
 			view_options = {
 				show_hidden = true,
-			}
+			},
+			win_options = {
+				signcolumn = "yes",
+			},
 		})
 	end
 }
