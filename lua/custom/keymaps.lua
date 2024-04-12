@@ -111,8 +111,8 @@ end
 
 vim.api.nvim_create_user_command('OpenAndChangeCwd', open_file_in_new_tab, {})
 vim.api.nvim_create_user_command('OpenOilInCwd', open_oil_in_cwd, {})
-vim.keymap.set('n', '<leader>O', '<CMD>Oil<CR>', {desc = "Open [O]il in current file directory"})
-vim.keymap.set('n', '<leader>o', '<CMD>OpenOilInCwd<CR>', {desc = "Open [O]il in current working directory"})
+vim.keymap.set('n', '<leader>o', '<CMD>Oil<CR>', {desc = "Open [O]il in current file directory"})
+vim.keymap.set('n', '<leader>O', '<CMD>OpenOilInCwd<CR>', {desc = "Open [O]il in current working directory"})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = 'oil',
