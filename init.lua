@@ -608,10 +608,14 @@ vim.opt.cmdheight=0
 vim.wo.relativenumber = true
 
 --Neovide settings
-if vim.g.neovide then
-  vim.g.neovide_refresh_rate = 179.96
-  vim.g.neovide_scale_factor = 0.80
-  vim.g.neovide_cursor_vfx_mode = "sonicboom"
+local neovide_config_exists = pcall(require, 'neovide_config')
+if neovide_config_exists then
+  require('neovide_config')
 end
+-- if vim.g.neovide then
+--   vim.g.neovide_refresh_rate = 179.96
+--   vim.g.neovide_scale_factor = 0.80
+--   vim.g.neovide_cursor_vfx_mode = "sonicboom"
+-- end
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
