@@ -87,6 +87,11 @@ vim.keymap.set('n', '<leader>tc', '<CMD>tabc<CR>', {desc = 'Close Current Tab'})
 vim.keymap.set('n', '<leader>ts', '<CMD>ChangeTabCwd<CR>', {desc = 'Set directory to current working directory for active tab'})
 vim.keymap.set('n', '<M-h>', '<CMD>tabn -<CR>', {desc = 'Go to previous tab'})
 vim.keymap.set('n', '<M-l>', '<CMD>tabn +<CR>', {desc = 'Go to next tab'})
+vim.keymap.set('n', '<C-Up>', '<C-W>k', { noremap = true })
+vim.keymap.set('n', '<C-Down>', '<C-W>j', { noremap = true })
+vim.keymap.set('n', '<C-Left>', '<C-W>h', { noremap = true })
+vim.keymap.set('n', '<C-Right>', '<C-W>l', { noremap = true })
+vim.keymap.set('n', '|', '<C-W>v', { noremap = true })
 
 ---------------------------------------
 -- Fine CmdLine
