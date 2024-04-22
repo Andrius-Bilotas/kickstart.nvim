@@ -610,8 +610,9 @@ vim.wo.relativenumber = true
 --Neovide settings
 local neovide_config_exists = pcall(require, 'neovide_config')
 if neovide_config_exists then
-  require('neovide_config')
+  require 'neovide_config'
 end
+
 -- if vim.g.neovide then
 --   vim.g.neovide_refresh_rate = 179.96
 --   vim.g.neovide_scale_factor = 0.80
