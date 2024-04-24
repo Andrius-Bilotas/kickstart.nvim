@@ -606,6 +606,7 @@ cmp.setup {
 }
 vim.opt.cmdheight=0
 vim.wo.relativenumber = true
+vim.opt.tabstop = 4
 
 --Neovide settings
 local neovide_config_exists = pcall(require, 'neovide_config')
