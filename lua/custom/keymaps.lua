@@ -135,5 +135,5 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Other
 ---------------------------------------
 
-vim.keymap.set('n', '<leader>w', '<CMD>w | !eslint_d --fix %<CR>', {desc = "Save changes with linting"})
-vim.keymap.set('n', '<leader>W', '<CMD>w<CR>', {desc = "Save changes without linting"})
+-- vim.keymap.set('n', '<leader>w', '<CMD>w | !eslint_d --fix %<CR>', {desc = "Save changes with linting"})
+vim.keymap.set('n', '<leader>w', '<CMD>w<CR>', {desc = "Save changes"})
