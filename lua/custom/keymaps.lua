@@ -136,5 +136,5 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Other
 ---------------------------------------
 vim.keymap.set('t', '<C-space>', '<C-\\><C-n>', { desc = 'Enter normal mode in Terminal view' })
--- vim.keymap.set('n', '<leader>w', '<CMD>w | !eslint_d --fix %<CR>', {desc = "Save changes with linting"})
-vim.keymap.set('n', '<leader>w', '<CMD>w<CR>', {desc = "Save changes"})
+vim.keymap.set('n', '<leader>w', '<CMD>w<CR>', {desc = "Save changes with linting"})
+vim.keymap.set('n', '<leader>W', '<CMD>noautocmd w<CR>', {desc = "Save changes without linting"})
