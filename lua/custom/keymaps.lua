@@ -85,6 +85,7 @@ vim.keymap.set('n', '<leader>tb', require('telescope.builtin').buffers, { desc =
 vim.keymap.set('n', '<leader>tn', '<CMD>tabe<CR>', {desc = 'Create New Tab'})
 vim.keymap.set('n', '<leader>tc', '<CMD>tabc<CR>', {desc = 'Close Current Tab'})
 vim.keymap.set('n', '<leader>ts', '<CMD>ChangeTabCwd<CR>', {desc = 'Set directory to current working directory for active tab'})
+vim.keymap.set('n', '<leader>tt', '<CMD>tabnew | terminal<CR>', { desc = 'Open terminal in a new tab'})
 vim.keymap.set('n', '<M-h>', '<CMD>tabn -<CR>', {desc = 'Go to previous tab'})
 vim.keymap.set('n', '<M-l>', '<CMD>tabn +<CR>', {desc = 'Go to next tab'})
 vim.keymap.set('n', '<C-Up>', '<C-W>k', { noremap = true })
@@ -134,6 +135,6 @@ vim.api.nvim_create_autocmd("FileType", {
 ---------------------------------------
 -- Other
 ---------------------------------------
-
+vim.keymap.set('t', '<C-space>', '<C-\\><C-n>', { desc = 'Enter normal mode in Terminal view' })
 -- vim.keymap.set('n', '<leader>w', '<CMD>w | !eslint_d --fix %<CR>', {desc = "Save changes with linting"})
 vim.keymap.set('n', '<leader>w', '<CMD>w<CR>', {desc = "Save changes"})
