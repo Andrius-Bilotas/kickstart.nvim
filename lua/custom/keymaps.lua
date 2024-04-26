@@ -72,9 +72,11 @@ end
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 -- vim.keymap.set('n', '<leader>fw', ':LiveGrepGitRoot<cr>', { desc = '[F]ind by Grep on Git Root' })
+
 ---------------------------------------
 -- Tabs
 ---------------------------------------
+
 local function change_tab_cwd()
   local git_root = find_git_root()
   vim.cmd.tc(git_root)
@@ -86,8 +88,18 @@ vim.keymap.set('n', '<leader>tn', '<CMD>tabe<CR>', {desc = 'Create New Tab'})
 vim.keymap.set('n', '<leader>tc', '<CMD>tabc<CR>', {desc = 'Close Current Tab'})
 vim.keymap.set('n', '<leader>ts', '<CMD>ChangeTabCwd<CR>', {desc = 'Set directory to current working directory for active tab'})
 vim.keymap.set('n', '<leader>tt', '<CMD>tabnew | terminal<CR>', { desc = 'Open terminal in a new tab'})
-vim.keymap.set('n', '<M-h>', '<CMD>tabn -<CR>', {desc = 'Go to previous tab'})
-vim.keymap.set('n', '<M-l>', '<CMD>tabn +<CR>', {desc = 'Go to next tab'})
+vim.keymap.set('n', '<M-h>', '<CMD>tabp<CR>', {desc = 'Go to previous tab'})
+vim.keymap.set('n', '<M-l>', '<CMD>tabn<CR>', {desc = 'Go to next tab'})
+vim.keymap.set('n', '<M-1>', 'gt 1', {desc = 'go to tab 1'})
+vim.keymap.set('n', '<M-2>', 'gt 2', {desc = 'go to tab 2'})
+vim.keymap.set('n', '<M-3>', 'gt 3', {desc = 'go to tab 3'})
+vim.keymap.set('n', '<M-4>', 'gt 4', {desc = 'go to tab 4'})
+vim.keymap.set('n', '<M-5>', 'gt 5', {desc = 'go to tab 5'})
+
+---------------------------------------
+-- Splits
+---------------------------------------
+
 vim.keymap.set('n', '<C-Up>', '<C-W>k', { noremap = true })
 vim.keymap.set('n', '<C-Down>', '<C-W>j', { noremap = true })
 vim.keymap.set('n', '<C-Left>', '<C-W>h', { noremap = true })
