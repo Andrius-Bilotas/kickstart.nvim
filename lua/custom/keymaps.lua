@@ -90,11 +90,11 @@ vim.keymap.set('n', '<leader>ts', '<CMD>ChangeTabCwd<CR>', {desc = 'Set director
 vim.keymap.set('n', '<leader>tt', '<CMD>tabnew | terminal<CR>', { desc = 'Open terminal in a new tab'})
 vim.keymap.set('n', '<M-h>', '<CMD>tabp<CR>', {desc = 'Go to previous tab'})
 vim.keymap.set('n', '<M-l>', '<CMD>tabn<CR>', {desc = 'Go to next tab'})
-vim.keymap.set('n', '<M-1>', 'gt 1', {desc = 'go to tab 1'})
-vim.keymap.set('n', '<M-2>', 'gt 2', {desc = 'go to tab 2'})
-vim.keymap.set('n', '<M-3>', 'gt 3', {desc = 'go to tab 3'})
-vim.keymap.set('n', '<M-4>', 'gt 4', {desc = 'go to tab 4'})
-vim.keymap.set('n', '<M-5>', 'gt 5', {desc = 'go to tab 5'})
+vim.keymap.set('n', '<M-1>', 'tabn 1', {desc = 'go to tab 1'})
+vim.keymap.set('n', '<M-2>', 'tabn 2', {desc = 'go to tab 2'})
+vim.keymap.set('n', '<M-3>', 'tabn 3', {desc = 'go to tab 3'})
+vim.keymap.set('n', '<M-4>', 'tabn 4', {desc = 'go to tab 4'})
+vim.keymap.set('n', '<M-5>', 'tabn 5', {desc = 'go to tab 5'})
 
 ---------------------------------------
 -- Splits
@@ -143,6 +143,16 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Monorepo
 ---------------------------------------
 -- vim.keymap.set('n', '<leader>ml', '<CMD>Telescope monorepo<CR>', { desc = "Open Repo List" })
+
+
+---------------------------------------
+-- Zoom in and out
+---------------------------------------
+if vim.g.neovide == true then
+  vim.api.nvim_set_keymap("n", "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>", { silent = true })
+  vim.api.nvim_set_keymap("n", "<C-0>", ":lua vim.g.neovide_scale_factor = 0.8<CR>", { silent = true })
+end
 
 ---------------------------------------
 -- Other

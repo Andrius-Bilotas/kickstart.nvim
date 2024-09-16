@@ -192,10 +192,10 @@ require('lazy').setup({
 
   {
     -- Theme inspired by Atom
-    'rebelot/kanagawa.nvim',
+    'folke/tokyonight.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.colorscheme 'tokyonight'
     end,
   },
 
