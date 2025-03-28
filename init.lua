@@ -606,6 +606,7 @@ cmp.setup {
 }
 vim.opt.cmdheight=0
 vim.wo.relativenumber = true
+vim.opt.fileformat = "unix"
 -- vim.opt.tabstop = 4
 
 --Neovide settings
