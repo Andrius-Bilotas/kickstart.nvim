@@ -344,6 +344,9 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 local telescopeActions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
+    file_ignore_patterns = {
+      "package%-lock.json"
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
