@@ -10,6 +10,7 @@
 * Move out the neovide config into an optional separate config file, and create an example config file, while ignoring the actual file
 * Figure out how to make eslint_d work properly (probably need the eslint.nvim plugin, integrated Mason one doesn't work properly)
 * (Low priority) Figure out whether it's possible to set the tab names to be the CWD name, optionally it'd be that when tab is not focused and switches to active file name when focused
+* Maybe implement this: https://github.com/rmagatti/auto-session
 
 # kickstart.nvim
 
