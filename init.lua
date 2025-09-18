@@ -181,11 +181,26 @@ require('lazy').setup({
         end, { desc = 'git diff against last commit' })
 
         -- Toggles
-        map('n', '<leader>gb', gs.toggle_current_line_blame, { desc = 'Toggle [G]it [B]lame line' })
-        map('n', '<leader>gd', gs.toggle_deleted, { desc = 'toggle [G]it show [D]eleted' })
+        map(
+          'n',
+          '<leader>gb',
+          gs.toggle_current_line_blame,
+          { desc = 'Toggle [G]it [B]lame line' }
+        )
+        map(
+          'n',
+          '<leader>gd',
+          gs.toggle_deleted,
+          { desc = 'toggle [G]it show [D]eleted' }
+        )
 
         -- Text object
-        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
+        map(
+          { 'o', 'x' },
+          'ih',
+          ':<C-U>Gitsigns select_hunk<CR>',
+          { desc = 'select git hunk' }
+        )
       end,
     },
   },
@@ -210,6 +225,13 @@ require('lazy').setup({
         theme = 'onedark',
         component_separators = '|',
         section_separators = '',
+      },
+      sections = {
+        lualine_x = {
+          function()
+            return require('auto-session.lib').current_session_name(true)
+          end,
+        },
       },
     },
   },
@@ -268,7 +290,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -319,18 +341,49 @@ vim.o.termguicolors = true
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set(
+  'n',
+  'k',
+  "v:count == 0 ? 'gk' : 'k'",
+  { expr = true, silent = true }
+)
+vim.keymap.set(
+  'n',
+  'j',
+  "v:count == 0 ? 'gj' : 'j'",
+  { expr = true, silent = true }
+)
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set(
+  'n',
+  '[d',
+  vim.diagnostic.goto_prev,
+  { desc = 'Go to previous diagnostic message' }
+)
+vim.keymap.set(
+  'n',
+  ']d',
+  vim.diagnostic.goto_next,
+  { desc = 'Go to next diagnostic message' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>e',
+  vim.diagnostic.open_float,
+  { desc = 'Open floating diagnostic message' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>q',
+  vim.diagnostic.setloclist,
+  { desc = 'Open diagnostics list' }
+)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+local highlight_group =
+  vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
     vim.highlight.on_yank()
@@ -341,11 +394,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-local telescopeActions = require('telescope.actions')
+local telescopeActions = require 'telescope.actions'
 require('telescope').setup {
   defaults = {
     file_ignore_patterns = {
-      "package%-lock.json"
+      'package%-lock.json',
     },
     mappings = {
       i = {
@@ -358,14 +411,14 @@ require('telescope').setup {
     buffers = {
       mappings = {
         n = {
-          ["<C-d>"] = telescopeActions.delete_buffer,
+          ['<C-d>'] = telescopeActions.delete_buffer,
         },
         i = {
-          ["<C-d>"] = telescopeActions.delete_buffer,
-        }
-      }
-    }
-  }
+          ['<C-d>'] = telescopeActions.delete_buffer,
+        },
+      },
+    },
+  },
 }
 
 -- Enable telescope fzf native, if installed
@@ -374,14 +427,27 @@ pcall(require('telescope').load_extension, 'fzf')
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 
-require('custom.keymaps')
+require 'custom.keymaps'
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = {
+      'c',
+      'cpp',
+      'go',
+      'lua',
+      'python',
+      'rust',
+      'tsx',
+      'javascript',
+      'typescript',
+      'vimdoc',
+      'vim',
+      'bash',
+    },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -464,11 +530,27 @@ local on_attach = function(_, bufnr)
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+  nmap(
+    'gd',
+    require('telescope.builtin').lsp_definitions,
+    '[G]oto [D]efinition'
+  )
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap(
+    'gI',
+    require('telescope.builtin').lsp_implementations,
+    '[G]oto [I]mplementation'
+  )
+  nmap(
+    '<leader>D',
+    require('telescope.builtin').lsp_type_definitions,
+    'Type [D]efinition'
+  )
+  nmap(
+    '<leader>ds',
+    require('telescope.builtin').lsp_document_symbols,
+    '[D]ocument [S]ymbols'
+  )
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -491,7 +573,8 @@ require('which-key').register {
   ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
   ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+  ['<leader>t'] = { name = '[T]ab', _ = 'which_key_ignore' },
+  ['<leader>a'] = { name = '[A]uto Session', _ = 'which_key_ignore' },
 }
 -- register which-key VISUAL mode
 -- required for visual <leader>hs (hunk stage) to work
@@ -607,9 +690,9 @@ cmp.setup {
     { name = 'path' },
   },
 }
-vim.opt.cmdheight=0
+vim.opt.cmdheight = 0
 vim.wo.relativenumber = true
-vim.opt.fileformat = "unix"
+vim.opt.fileformat = 'unix'
 -- vim.opt.tabstop = 4
 
 --Neovide settings
