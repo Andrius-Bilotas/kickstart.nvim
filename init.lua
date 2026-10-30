@@ -725,8 +725,25 @@ do
   vim.keymap.set(
     'n',
     '<leader>sf',
-    builtin.find_files,
-    { desc = '[S]earch [F]iles' }
+    function()
+      builtin.find_files {
+        find_command = {
+          'rg',
+          '--files',
+          '--color',
+          'never',
+          '--glob',
+          '!**/node_modules/**',
+        },
+      }
+    end,
+    { desc = '[S]earch [F]iles (respect ignore files)' }
+  )
+  vim.keymap.set(
+    'n',
+    '<leader>sF',
+    function() builtin.find_files { hidden = true, no_ignore = true } end,
+    { desc = '[S]earch [F]iles (include ignored)' }
   )
   vim.keymap.set(
     'n',
@@ -737,14 +754,42 @@ do
   vim.keymap.set(
     { 'n', 'v' },
     '<leader>sw',
-    builtin.grep_string,
-    { desc = '[S]earch current [W]ord' }
+    function()
+      builtin.grep_string {
+        additional_args = { '--glob=!**/node_modules/**' },
+      }
+    end,
+    { desc = '[S]earch current [W]ord (respect ignore files)' }
+  )
+  vim.keymap.set(
+    { 'n', 'v' },
+    '<leader>sW',
+    function()
+      builtin.grep_string {
+        additional_args = { '--hidden', '--no-ignore' },
+      }
+    end,
+    { desc = '[S]earch current [W]ord (include ignored)' }
   )
   vim.keymap.set(
     'n',
     '<leader>sg',
-    builtin.live_grep,
-    { desc = '[S]earch by [G]rep' }
+    function()
+      builtin.live_grep {
+        additional_args = { '--glob=!**/node_modules/**' },
+      }
+    end,
+    { desc = '[S]earch by [G]rep (respect ignore files)' }
+  )
+  vim.keymap.set(
+    'n',
+    '<leader>sG',
+    function()
+      builtin.live_grep {
+        additional_args = { '--hidden', '--no-ignore' },
+      }
+    end,
+    { desc = '[S]earch by [G]rep (include ignored)' }
   )
   vim.keymap.set(
     'n',
@@ -1029,6 +1074,7 @@ do
   local servers = {
     -- clangd = {},
     gopls = {},
+    ts_ls = {},
     -- pyright = {},
     -- tsc = {},
     --
@@ -1107,6 +1153,8 @@ do
   local ensure_installed = vim.tbl_keys(servers or {})
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
+    'goimports',
+    'prettier',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -1141,6 +1189,11 @@ do
     -- You can also specify external formatters in here.
     formatters_by_ft = {
       lua = { 'stylua' },
+      go = { 'goimports' },
+      javascript = { 'prettier' },
+      javascriptreact = { 'prettier' },
+      typescript = { 'prettier' },
+      typescriptreact = { 'prettier' },
       -- rust = { 'rustfmt' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
