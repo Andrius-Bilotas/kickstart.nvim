@@ -2,4 +2,9 @@ tags
 test.sh
 .luarc.json
 nvim
+
 neovide_config.lua
+
+spell/
+
+.DS_Store
